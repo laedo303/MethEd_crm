@@ -6,9 +6,26 @@ const modalFieldset = document.querySelector('.modal__fieldset');
 const modalCheckbox = document.querySelector('.modal__checkbox');
 const modalInputDiscount = document.querySelector('.modal__input_discount');
 
-const removeCalssActive = document.querySelector('.overlay');
-removeCalssActive.classList.remove('active');
+const addGoods = document.querySelector('.panel__add-goods');
+const overlay = document.querySelector('.overlay');
+const overlayModal = document.querySelector('.overlay__modal');
+overlay.classList.remove('active');
 
+addGoods.addEventListener('click', () => {
+  overlay.classList.add('active');
+});
+
+overlayModal.addEventListener('click', event => {
+  event.stopPropagation();
+});
+
+overlay.addEventListener('click', () => {
+  overlay.classList.remove('active');
+});
+
+document.querySelector('.modal__close').addEventListener('click', () => {
+  overlay.classList.remove('active');
+});
 
 const goods = [
   {
@@ -91,7 +108,7 @@ const createRow = (obj) => {
     </td>
   </tr>
   `;
-return tr;
+  return tr;
 };
 
 const renderGoods = (arr) => {
@@ -101,6 +118,5 @@ const renderGoods = (arr) => {
     tBody.append(createRow(trItem));
   });
   return tBody;
-
 }
 renderGoods(goods);
