@@ -10,21 +10,7 @@ const overlay = document.querySelector('.overlay');
 const overlayModal = document.querySelector('.overlay__modal');
 overlay.classList.remove('active');
 
-addGoods.addEventListener('click', () => {
-  overlay.classList.add('active');
-});
-
-overlayModal.addEventListener('click', event => {
-  event.stopPropagation();
-});
-
-overlay.addEventListener('click', () => {
-  overlay.classList.remove('active');
-});
-
-document.querySelector('.modal__close').addEventListener('click', () => {
-  overlay.classList.remove('active');
-});
+const tableBody = document.querySelector('.table__body');
 
 const goods = [
   {
@@ -87,6 +73,8 @@ const goods = [
 
 const createRow = (obj) => {
   const tr = document.createElement('tr');
+  // tr.classList.add('table__row');
+
 
   tr.innerHTML = `
   <tr>
@@ -110,6 +98,8 @@ const createRow = (obj) => {
   return tr;
 };
 
+
+
 const renderGoods = (arr) => {
   const tBody = document.querySelector('.table__body');
 
@@ -119,3 +109,22 @@ const renderGoods = (arr) => {
   return tBody;
 }
 renderGoods(goods);
+
+tableBody.addEventListener('click', e => {
+  const target = e.target;
+  if (target.closest('.table__btn_del')) {
+    target.closest('tr').remove();
+  }
+})
+
+
+addGoods.addEventListener('click', () => {
+  overlay.classList.add('active');
+});
+
+overlay.addEventListener('click', e => {
+  const target = e.target;
+  if(target === overlay || target.closest('.modal__close')) {
+    overlay.classList.remove('active');
+  }
+});
