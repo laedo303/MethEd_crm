@@ -1,16 +1,13 @@
 'use strict';
-
+const modalForm = document.querySelector('.modal__form');
 const modalTitle = document.querySelector('.modal__title');
-const modalFieldset = document.querySelector('.modal__fieldset');
 const modalCheckbox = document.querySelector('.modal__checkbox');
 const modalInputDiscount = document.querySelector('.modal__input_discount');
-
 const addGoods = document.querySelector('.panel__add-goods');
 const overlay = document.querySelector('.overlay');
-const overlayModal = document.querySelector('.overlay__modal');
-overlay.classList.remove('active');
+const modalSubmit = document.querySelector('.modal__submit');
 
-const tableBody = document.querySelector('.table__body');
+const tBody = document.querySelector('.table__body');
 
 const goods = [
   {
@@ -73,8 +70,6 @@ const goods = [
 
 const createRow = (obj) => {
   const tr = document.createElement('tr');
-  // tr.classList.add('table__row');
-
 
   tr.innerHTML = `
   <tr>
@@ -98,11 +93,7 @@ const createRow = (obj) => {
   return tr;
 };
 
-
-
 const renderGoods = (arr) => {
-  const tBody = document.querySelector('.table__body');
-
   arr.forEach(trItem => {
     tBody.append(createRow(trItem));
   });
@@ -110,21 +101,32 @@ const renderGoods = (arr) => {
 }
 renderGoods(goods);
 
-tableBody.addEventListener('click', e => {
-  const target = e.target;
-  if (target.closest('.table__btn_del')) {
-    target.closest('tr').remove();
-  }
-})
+const createGood = modalForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const newGood = Object.fromEntries(formData);
+  console.log('newGood: ', newGood);
 
+  overlay.classList.remove('active');
+
+  });
+
+goods.push(createGood);
+
+console.log();
+
+tBody.addEventListener('click', e => {
+  if (e.target.closest('.table__btn_del')) {
+    e.target.closest('tr').remove();
+  }
+});
 
 addGoods.addEventListener('click', () => {
   overlay.classList.add('active');
 });
 
 overlay.addEventListener('click', e => {
-  const target = e.target;
-  if(target === overlay || target.closest('.modal__close')) {
+  if(e.target === overlay || e.target.closest('.modal__close')) {
     overlay.classList.remove('active');
   }
 });
