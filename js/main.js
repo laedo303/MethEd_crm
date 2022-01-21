@@ -113,7 +113,7 @@ const createGood = modalForm.addEventListener('submit', e => {
 
 goods.push(createGood);
 
-console.log();
+console.log(createGood);
 
 tBody.addEventListener('click', e => {
   if (e.target.closest('.table__btn_del')) {
