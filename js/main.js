@@ -6,8 +6,10 @@ const modalInputDiscount = document.querySelector('.modal__input_discount');
 const addGoods = document.querySelector('.panel__add-goods');
 const overlay = document.querySelector('.overlay');
 const modalSubmit = document.querySelector('.modal__submit');
+overlay.classList.remove('active');
 
 const tBody = document.querySelector('.table__body');
+
 
 const goods = [
   {
@@ -68,6 +70,8 @@ const goods = [
   },
 ];
 
+
+
 const createRow = (obj) => {
   const tr = document.createElement('tr');
 
@@ -93,27 +97,52 @@ const createRow = (obj) => {
   return tr;
 };
 
-const renderGoods = (arr) => {
-  arr.forEach(trItem => {
-    tBody.append(createRow(trItem));
-  });
-  return tBody;
-}
-renderGoods(goods);
+// const renderGoods = (arr) => {
+//   arr.forEach(trItem => {
+//     tBody.append(createRow(trItem));
+//   });
+//   return tBody;
+// }
+// renderGoods(goods);
 
-const createGood = modalForm.addEventListener('submit', e => {
+modalForm.addEventListener('submit', e => {
   e.preventDefault();
   const formData = new FormData(e.target);
+  console.log('formData: ', formData);
+
   const newGood = Object.fromEntries(formData);
+
+  goods.push(newGood);
+  console.log(goods);
+
   console.log('newGood: ', newGood);
-
+  // tBody.append(createRow(newGood));
   overlay.classList.remove('active');
+});
 
-  });
+const renderGoods = arr => {
+  for(let trItem of arr) {
+    tBody.append(createRow(trItem));
+  };
+  return tBody;
+};
+renderGoods(goods);
 
-goods.push(createGood);
 
-console.log(createGood);
+
+// const createGood = () => {
+//   modalForm.addEventListener('submit', e => {
+//     e.preventDefault();
+//     const formData = new FormData(e.target);
+//     const newGood = Object.fromEntries(formData);
+//     goods.push(newGood);
+
+//     overlay.classList.remove('active');
+
+//     createRow(newGood, 7);
+//   });
+// };
+
 
 tBody.addEventListener('click', e => {
   if (e.target.closest('.table__btn_del')) {
@@ -128,5 +157,11 @@ addGoods.addEventListener('click', () => {
 overlay.addEventListener('click', e => {
   if(e.target === overlay || e.target.closest('.modal__close')) {
     overlay.classList.remove('active');
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'Escape') {
+    modalForm.reset();
   }
 });

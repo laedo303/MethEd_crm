@@ -1,4 +1,4 @@
-'use strict';
+
 [
   {
     "id": 1,
@@ -14,6 +14,7 @@
       "big": "img/smrtxiaomi11t-b.jpg"
     },
   },
+
   {
     "id": 2,
     "title": "Радиоуправляемый автомобиль Cheetan",
@@ -28,6 +29,7 @@
       "big": "img/cheetancar-b.jpg"
     },
   },
+
   {
     "id": 3,
     "title": "ТВ приставка MECOOL KI",
@@ -42,6 +44,7 @@
       "big": "img/tvboxmecool-b.jpg"
     },
   },
+
   {
     "id": 4,
     "title": "Витая пара PROConnect 01-0043-3-25",
@@ -56,4 +59,5 @@
       "big": "img/lan_proconnect43-3-25-b.jpg"
     },
   },
+
 ];
