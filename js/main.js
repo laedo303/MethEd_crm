@@ -11,6 +11,11 @@ overlay.classList.remove('active');
 const tBody = document.querySelector('.table__body');
 
 
+const getLengthTr = () => {
+  const lengthTr = tBody.querySelectorAll('tr').length;
+  return lengthTr + 1;
+};
+
 const goods = [
   {
     "id": 1,
@@ -70,14 +75,14 @@ const goods = [
   },
 ];
 
-
+console.log(goods[0].id);
 
 const createRow = (obj) => {
   const tr = document.createElement('tr');
 
-  tr.innerHTML = `
+  tr.insertAdjacentHTML('beforeend', `
   <tr>
-    <td class="table__cell">${obj.id + 2}</td>
+    <td class="table__cell">${getLengthTr()}</td>
     <td class="table__cell table__cell_left table__cell_name" data-id="24601654816512">
       <span class="table__cell-id">id: 24601654816512</span>
       ${obj.title}
@@ -93,17 +98,25 @@ const createRow = (obj) => {
       <button class="table__btn table__btn_del"></button>
     </td>
   </tr>
-  `;
+  `);
   return tr;
 };
 
-// const renderGoods = (arr) => {
-//   arr.forEach(trItem => {
-//     tBody.append(createRow(trItem));
-//   });
-//   return tBody;
-// }
-// renderGoods(goods);
+const renderGoods = (arr) => {
+  arr.forEach(trItem => {
+    tBody.append(createRow(trItem));
+  });
+  return tBody;
+}
+renderGoods(goods);
+
+// const renderGood = (elem, goods) => {
+//   const allRow = goods.map(createRow);
+//   elem.append(...allRow);
+
+// };
+
+
 
 modalForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -111,37 +124,10 @@ modalForm.addEventListener('submit', e => {
   console.log('formData: ', formData);
 
   const newGood = Object.fromEntries(formData);
-
-  goods.push(newGood);
-  console.log(goods);
-
-  console.log('newGood: ', newGood);
-  // tBody.append(createRow(newGood));
+  tBody.append(createRow(newGood));
   overlay.classList.remove('active');
 });
 
-const renderGoods = arr => {
-  for(let trItem of arr) {
-    tBody.append(createRow(trItem));
-  };
-  return tBody;
-};
-renderGoods(goods);
-
-
-
-// const createGood = () => {
-//   modalForm.addEventListener('submit', e => {
-//     e.preventDefault();
-//     const formData = new FormData(e.target);
-//     const newGood = Object.fromEntries(formData);
-//     goods.push(newGood);
-
-//     overlay.classList.remove('active');
-
-//     createRow(newGood, 7);
-//   });
-// };
 
 
 tBody.addEventListener('click', e => {
