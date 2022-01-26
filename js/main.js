@@ -6,15 +6,13 @@ const modalInputDiscount = document.querySelector('.modal__input_discount');
 const addGoods = document.querySelector('.panel__add-goods');
 const overlay = document.querySelector('.overlay');
 const modalSubmit = document.querySelector('.modal__submit');
-overlay.classList.remove('active');
-
+const vendorCodeId = document.querySelector('.vendor-code__id');
 const tBody = document.querySelector('.table__body');
+const panelAddGoods = document.querySelector('.panel__add-goods');
+const tableCell = document.querySelector('.table__cell');
+const title = document.querySelector('#name');
 
-
-const getLengthTr = () => {
-  const lengthTr = tBody.querySelectorAll('tr').length;
-  return lengthTr + 1;
-};
+overlay.classList.remove('active');
 
 const goods = [
   {
@@ -75,16 +73,20 @@ const goods = [
   },
 ];
 
-console.log(goods[0].id);
+const getRandId = () => {
+  const randId = Math.round(Math.random() * 100_000_000_000_000);
+  return randId;
+};
+
 
 const createRow = (obj) => {
   const tr = document.createElement('tr');
 
   tr.insertAdjacentHTML('beforeend', `
   <tr>
-    <td class="table__cell">${getLengthTr()}</td>
-    <td class="table__cell table__cell_left table__cell_name" data-id="24601654816512">
-      <span class="table__cell-id">id: 24601654816512</span>
+    <td class="table__cell">${getCountAllTr()}</td>
+    <td class="table__cell table__cell_left table__cell_name" data-id=12345678901234>
+      <span class="table__cell-id">id: ${getRandId()}</span>
       ${obj.title}
     </td>
     <td class="table__cell table__cell_left">${obj.category}</td>
@@ -102,23 +104,23 @@ const createRow = (obj) => {
   return tr;
 };
 
+
+function getCountAllTr () {
+  const lengthTr = tBody.querySelectorAll('tr').length;
+  return lengthTr + 1;
+};
+
 const renderGoods = (arr) => {
   arr.forEach(trItem => {
+    getRandId();
     tBody.append(createRow(trItem));
   });
   return tBody;
 }
 renderGoods(goods);
 
-// const renderGood = (elem, goods) => {
-//   const allRow = goods.map(createRow);
-//   elem.append(...allRow);
 
-// };
-
-
-
-modalForm.addEventListener('submit', e => {
+const newGood = modalForm.addEventListener('submit', e => {
   e.preventDefault();
   const formData = new FormData(e.target);
   console.log('formData: ', formData);
@@ -127,8 +129,6 @@ modalForm.addEventListener('submit', e => {
   tBody.append(createRow(newGood));
   overlay.classList.remove('active');
 });
-
-
 
 tBody.addEventListener('click', e => {
   if (e.target.closest('.table__btn_del')) {
@@ -151,3 +151,16 @@ document.addEventListener('keydown', e => {
     modalForm.reset();
   }
 });
+
+
+// {
+//   "name": "saitek x52 pro",
+//   "category": "game",
+//   "description": "saitek x52 pro специально создан для лётных симуляторов",
+//   "units": "rg",
+//   "discount": "on",
+//   "count": "1",
+//   "price": "15000",
+//   "image": "",
+//   "id": 101,
+// }
