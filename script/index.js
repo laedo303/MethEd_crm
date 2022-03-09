@@ -5,6 +5,7 @@ import render from './modules/render.js';
 const {
   renderGoods,
   deleteGood,
+  pictureBtn,
 } = render;
 
 import popUp from './modules/popUp.js';
@@ -20,6 +21,7 @@ import formControl from './modules/control.js';
 const init = () => {
   renderGoods(products);
   deleteGood(products);
+  pictureBtn();
   openPopup();
   closePopUp();
   formControl();

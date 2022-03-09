@@ -57,8 +57,24 @@ const deleteGood = products => {
   });
 };
 
+
+const pictureBtn = () => {
+  table.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target.closest('.table__btn_pic')) {
+      open(
+          'https://www.free-wallpapers.su/data/media/21/pri2068.jpg',
+          '',
+          'width=670,height=500,top=100,left=500',
+      );
+    }
+  });
+};
+
+
 export default {
   createRow,
   renderGoods,
   deleteGood,
+  pictureBtn,
 };
