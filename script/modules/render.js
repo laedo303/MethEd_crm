@@ -16,6 +16,8 @@ const createRow = (obj) => {
 
   const btnPic = document.createElement('button');
   btnPic.classList.add('table__btn', 'table__btn_pic');
+  btnPic.setAttribute('data-pic', 'url');
+
 
   const btnEdit = document.createElement('button');
   btnEdit.classList.add('table__btn', 'table__btn_edit');
@@ -78,7 +80,7 @@ const pictureBtn = () => {
       open(
           'https://www.free-wallpapers.su/data/media/21/pri2068.jpg',
           '',
-          'width=670,height=500,top=100,left=500',
+          'width=800,height=600,top=100,left=300',
       );
     }
   });
