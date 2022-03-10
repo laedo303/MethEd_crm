@@ -76,12 +76,16 @@ const deleteGood = products => {
 const pictureBtn = () => {
   table.addEventListener('click', (e) => {
     const target = e.target;
+    const winWidth = ((window.screen.width - 640) / 2);
+    console.log('winWidth: ', winWidth);
+    const winHeight = ((window.screen.height - 480) / 2);
+    console.log('winHeight: ', winHeight);
     if (target.closest('.table__btn_pic')) {
       open(
           'https://www.free-wallpapers.su/data/media/21/pri2068.jpg',
           '',
-          'width=800,height=600,top=100,left=300',
-      );
+          'width=640,height=480',
+      ).moveTo(winWidth, winHeight);
     }
   });
 };
