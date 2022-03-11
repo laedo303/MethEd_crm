@@ -16,16 +16,18 @@ const createRow = (obj) => {
 
   const btnPic = document.createElement('button');
   btnPic.classList.add('table__btn', 'table__btn_pic');
-  btnPic.setAttribute('data-pic', 'url');
+  btnPic.setAttribute('data-pic', 'url=https://www.free-wallpapers.su/data/media/21/pri2068.jpg');
+  btnWrapper.append(btnPic);
 
 
   const btnEdit = document.createElement('button');
   btnEdit.classList.add('table__btn', 'table__btn_edit');
+  btnWrapper.append(btnEdit);
 
   const btnDel = document.createElement('button');
   btnDel.classList.add('table__btn', 'table__btn_del');
+  btnWrapper.append(btnDel);
 
-  btnWrapper.append(btnPic, btnEdit, btnDel);
 
   tr.innerHTML = `
     <td class="table__cell table__cell_left table__cell_name"
