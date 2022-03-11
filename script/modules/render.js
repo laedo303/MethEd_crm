@@ -16,7 +16,7 @@ const createRow = (obj) => {
 
   const btnPic = document.createElement('button');
   btnPic.classList.add('table__btn', 'table__btn_pic');
-  btnPic.setAttribute('data-pic', 'url=https://www.free-wallpapers.su/data/media/21/pri2068.jpg');
+  btnPic.setAttribute('data-pic', 'https://www.free-wallpapers.su/data/media/21/pri2068.jpg');
   btnWrapper.append(btnPic);
 
 
@@ -78,13 +78,15 @@ const deleteGood = products => {
 const pictureBtn = () => {
   table.addEventListener('click', (e) => {
     const target = e.target;
+
     const winWidth = ((window.screen.width - 640) / 2);
-    console.log('winWidth: ', winWidth);
     const winHeight = ((window.screen.height - 480) / 2);
-    console.log('winHeight: ', winHeight);
+
     if (target.closest('.table__btn_pic')) {
+      const btnPicUrl = table.querySelector('.table__btn_pic').dataset.pic;
+      console.log('btnPicUrl: ', btnPicUrl);
       open(
-          'https://www.free-wallpapers.su/data/media/21/pri2068.jpg',
+          btnPicUrl,
           '',
           'width=640,height=480',
       ).moveTo(winWidth, winHeight);
