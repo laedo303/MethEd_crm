@@ -9,9 +9,26 @@ const {
 const createRow = (obj) => {
   const tr = document.createElement('tr');
   tr.classList.add('goods__row');
-  const btnWrapper = document
-      .querySelector('.table__cell_btn-wrapper')
-      .cloneNode(true);
+
+  const btnWrapper = document.createElement('td');
+  btnWrapper.classList.add('table__cell', 'table__cell_btn-wrapper');
+
+
+  const btnPic = document.createElement('button');
+  btnPic.classList.add('table__btn', 'table__btn_pic');
+  btnPic.setAttribute('data-pic', 'https://www.free-wallpapers.su/data/media/21/pri2068.jpg');
+  btnWrapper.append(btnPic);
+
+
+  const btnEdit = document.createElement('button');
+  btnEdit.classList.add('table__btn', 'table__btn_edit');
+  btnWrapper.append(btnEdit);
+
+  const btnDel = document.createElement('button');
+  btnDel.classList.add('table__btn', 'table__btn_del');
+  btnWrapper.append(btnDel);
+
+
   tr.innerHTML = `
     <td class="table__cell table__cell_left table__cell_name"
       data-id="24601654816512">
@@ -57,8 +74,30 @@ const deleteGood = products => {
   });
 };
 
+
+const pictureBtn = () => {
+  table.addEventListener('click', (e) => {
+    const target = e.target;
+
+    const winWidth = ((window.screen.width - 640) / 2);
+    const winHeight = ((window.screen.height - 480) / 2);
+
+    if (target.closest('.table__btn_pic')) {
+      const btnPicUrl = table.querySelector('.table__btn_pic').dataset.pic;
+      console.log('btnPicUrl: ', btnPicUrl);
+      open(
+          btnPicUrl,
+          '',
+          'width=640,height=480',
+      ).moveTo(winWidth, winHeight);
+    }
+  });
+};
+
+
 export default {
   createRow,
   renderGoods,
   deleteGood,
+  pictureBtn,
 };
